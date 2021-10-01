@@ -19,6 +19,23 @@ body#top {
   background-color: #c6aa76;
 }
 
+.bg-honey-yellow {
+  --fadeout-color: #edb32e;
+  background-color: #edb32e;
+}
+
+.accent-woodland-green {
+  --accent-color: #3a4527;
+}
+
+.accent-vassar-gold {
+  --accent-color: #c6aa76;
+}
+
+.accent-honey-yellow {
+  --accent-color: #edb32e;
+}
+
 .color-cold-steel,
 .color-cold-steel * {
   color: #889;
@@ -59,15 +76,16 @@ body#top {
   background-attachment: fixed;
   padding-top: 100vh;
 }
-.cover-photo-scroll-in.content-transitions-in {
+
+.content-transitions-in {
   padding-top: 14rem;
 }
-.cover-photo-scroll-in.content-transitions-in .content {
+.content-transitions-in .content {
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition: 1s all ease;
 }
-.cover-photo-scroll-in.content-transitions-in.top-25pfrom-topOfWindow .content {
+.content-transitions-in.top-25pfrom-topOfWindow .content {
   opacity: 1;
   clip-path: inset(0 0 0 -1.4rem);
 }
@@ -138,10 +156,19 @@ h2 {
 
 .tape-translucent .content:before {
   mix-blend-mode: multiply;
+  opacity: 0.7;
 }
 
 .tape-gold {
   --tape-bg: #c6aa76;
+}
+
+.tape-yellow {
+  --tape-bg: #edb32e;
+}
+
+.tape-green {
+  --tape-bg: #3a4527;
 }
 
 .content-align-middle .content {
@@ -397,6 +424,425 @@ h2 .scripty {
 }
 
 /* END CROSSROADS COVER */
+.has-accent.title-content {
+  border-left: 0.6em solid var(--accent-color, #aaa);
+}
+
 .hidden {
   display: none;
+}
+
+.top-links {
+  font-size: calc(1em + 0.5 * ((100vw - 20em) / 60));
+}
+
+.component--instituteLogo {
+  --highlight-color: #3a4527;
+  --highlight-color-2: #00f;
+  height: 100vh;
+  position: relative;
+}
+
+html {
+  margin: 0 !important;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@keyframes logo-rise {
+  0% {
+    width: 0;
+  }
+  33% {
+    width: 14em;
+  }
+  66% {
+    width: 14em;
+  }
+  100% {
+    width: 6em;
+  }
+}
+@keyframes text-rise {
+  0% {
+    margin-top: 50vh;
+  }
+  100% {
+    margin-top: 10vh;
+  }
+}
+.ray {
+  height: 1px;
+  position: absolute;
+  transition: 1s all ease;
+}
+
+.ray-1 {
+  border-top: 1px solid #c6aa76;
+  top: 50%;
+  left: 0;
+}
+
+.ray-2 {
+  border-left: 1px solid #c6aa76;
+  bottom: 50%;
+  left: 50%;
+}
+
+.ray-3 {
+  border-left: 1px solid #c6aa76;
+  bottom: 50%;
+  left: 50%;
+  transform: rotate(60deg);
+  transform-origin: bottom left;
+}
+
+.ray-4 {
+  border-left: 1px solid #c6aa76;
+  bottom: calc(50% - 0.1em);
+  left: 50%;
+  transform: rotate(-60deg);
+  transform-origin: bottom left;
+}
+
+@keyframes ray-1 {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+    left: auto;
+    right: 0;
+    opacity: 0;
+  }
+}
+@keyframes ray-2 {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 50%;
+  }
+  100% {
+    height: 0%;
+    bottom: auto;
+    top: 0;
+    opacity: 0;
+  }
+}
+@keyframes ray-3 {
+  0% {
+    height: 0%;
+    transform-origin: bottom left;
+  }
+  50% {
+    height: 100%;
+    transform-origin: bottom left;
+  }
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+@keyframes ray-4 {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 100%;
+  }
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+@keyframes text-scale {
+  0% {
+    font-size: 3rem;
+  }
+  100% {
+    font-size: 2rem;
+  }
+}
+.activate .ray-1 {
+  animation-duration: 1s;
+  animation-name: ray-1;
+  animation-fill-mode: forwards;
+}
+.activate .ray-2 {
+  animation-duration: 1s;
+  animation-name: ray-2;
+  animation-fill-mode: forwards;
+}
+.activate .ray-3 {
+  animation-duration: 1s;
+  animation-name: ray-3;
+  animation-fill-mode: forwards;
+}
+.activate .ray-4 {
+  animation-duration: 1s;
+  animation-name: ray-4;
+  animation-fill-mode: forwards;
+}
+.activate .institute-logo {
+  animation-duration: 3s;
+  animation-name: logo-rise;
+  animation-fill-mode: forwards;
+}
+
+.institute-logo__container {
+  width: 100%;
+  position: absolute;
+  bottom: 50%;
+  right: 0;
+  text-align: center;
+}
+.institute-logo__container .institute-logo {
+  width: 10em;
+  display: block;
+  line-height: 0;
+  margin: 0 auto -0.2em auto;
+}
+
+.institute-text__container {
+  margin-top: 50vh;
+  text-align: center;
+  animation-duration: 1s;
+  animation-name: text-rise;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.institute__main-title {
+  font-family: masqualero;
+  font-size: 3rem;
+  transition: 1s all ease;
+  opacity: 0;
+  padding-top: 1em;
+  animation-duration: 1s;
+  animation-name: text-scale;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.activate .institute__main-title {
+  opacity: 1;
+}
+
+.institute__sub-title {
+  font-family: futura-pt;
+  font-size: 1.4rem;
+  margin-top: 0.2em;
+}
+
+.institute-text__container p {
+  margin-bottom: 0;
+}
+
+@keyframes link-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes logo-place-top {
+  0% {
+    bottom: 50%;
+  }
+  100% {
+    bottom: calc(100% - 6em);
+  }
+}
+.institute-logo__container {
+  animation-duration: 1s;
+  animation-name: logo-place-top;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.top-links {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+.top-links ul {
+  padding: 1rem;
+  text-align: center;
+}
+.top-links li {
+  opacity: 0;
+  list-style: none;
+  display: inline;
+  animation-duration: 2s;
+  animation-name: link-fade-in;
+  animation-fill-mode: forwards;
+}
+.top-links li:nth-child(1) {
+  animation-delay: 2.2s;
+}
+.top-links li:nth-child(2) {
+  animation-delay: 2.4s;
+}
+.top-links li:nth-child(3) {
+  animation-delay: 2.6s;
+}
+.top-links li:nth-child(4) {
+  animation-delay: 2.8s;
+}
+.top-links li:nth-child(5) {
+  animation-delay: 3s;
+}
+.top-links li:nth-child(6) {
+  animation-delay: 3.2s;
+}
+.top-links li:nth-child(7) {
+  animation-delay: 3.4s;
+}
+.top-links li:nth-child(8) {
+  animation-delay: 3.6s;
+}
+.top-links li:nth-child(9) {
+  animation-delay: 3.8s;
+}
+.top-links li:nth-child(10) {
+  animation-delay: 4s;
+}
+.top-links li:nth-child(11) {
+  animation-delay: 4.2s;
+}
+.top-links li:nth-child(12) {
+  animation-delay: 4.4s;
+}
+.top-links li:nth-child(13) {
+  animation-delay: 4.6s;
+}
+.top-links li:nth-child(14) {
+  animation-delay: 4.8s;
+}
+.top-links li:nth-child(15) {
+  animation-delay: 5s;
+}
+.top-links li:nth-child(16) {
+  animation-delay: 5.2s;
+}
+.top-links li:nth-child(17) {
+  animation-delay: 5.4s;
+}
+.top-links li:nth-child(18) {
+  animation-delay: 5.6s;
+}
+.top-links li:nth-child(19) {
+  animation-delay: 5.8s;
+}
+.top-links li:nth-child(20) {
+  animation-delay: 6s;
+}
+.top-links a {
+  font-family: "futura-pt-condensed", sans-serif;
+  font-size: 4em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 0.2em;
+  transition: 0.4s all ease;
+}
+.top-links a:link, .top-links a:visited {
+  color: #3a4527;
+}
+.top-links a:hover {
+  color: #edb32e;
+}
+
+@keyframes background-shift {
+  0% {
+    background: #fff;
+  }
+  100% {
+    background: #ebebdc;
+  }
+}
+.component--instituteLogo {
+  animation-duration: 2s;
+  animation-name: background-shift;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+/*
+
+
+On return:
+- Set up full-width styling
+- Get animation working
+
+
+*/
+.component--fullWidth-fullHeight {
+  height: 100vh;
+  min-height: 100vh;
+  padding: 0;
+}
+.component--fullWidth-fullHeight .content {
+  max-width: none;
+}
+
+:root {
+  --highlight-color: #f00;
+  --highlight-color-2: #00f;
+}
+
+li a.link--wipe:hover {
+  background-color: transparent !important;
+}
+
+.link--wipe {
+  font-size: 1.4em;
+  background-image: linear-gradient(to right, var(--highlight-color) 0%, var(--highlight-color) 100%);
+  text-decoration: none;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat;
+  background-position: 0px bottom;
+  padding: 0.1% 0px;
+}
+.link--wipe, .link--wipe > span {
+  transition: background 0.4s ease;
+}
+.link--wipe:hover {
+  background-size: 100% 1px;
+}
+.link--wipe {
+  background-size: 0px 100%;
+}
+.link--wipe:hover {
+  background-size: 100% 100%;
+}
+
+.link--wipe-inner {
+  --text-color: #fff;
+  position: relative;
+  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+  background-image: linear-gradient(to right, var(--text-color) 0%, var(--text-color) 49.99%, var(--highlight-color) 50%, var(--highlight-color) 100%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-size: 200%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+}
+.link--wipe-inner:hover {
+  background-size: 200%;
+  background-position: 0 100%;
+}
+
+.link-wipeBgColor-green {
+  --highlight-color: #3a4527;
+}
+
+.link-wipeBgColor-yellow {
+  --highlight-color: #edb32e;
 }

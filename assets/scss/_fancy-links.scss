@@ -1,0 +1,64 @@
+:root {
+  --highlight-color: #f00;
+  --highlight-color-2: #00f;
+}
+
+li a.link--wipe:hover {
+  background-color: transparent !important;
+}
+
+.link--wipe {
+
+  & {
+    font-size: 1.4em;
+  	background-image: linear-gradient(to right, var(--highlight-color) 0%, var(--highlight-color) 100%);
+    text-decoration: none;
+  position: relative;
+      width: auto;
+  //    background-size: 0px 1px;
+      background-repeat: no-repeat;
+      background-position: 0px bottom;
+//      transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+      padding: 0.1% 0px;
+  }
+  &, & > span {
+//    transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+    transition: background 0.4s ease;
+  }
+  &:hover {
+      background-size: 100% 1px;
+  }
+
+
+  & {
+    background-size: 0px 100%;
+  }
+  &:hover {
+    background-size: 100% 100%;
+  }
+}
+.link--wipe-inner {
+  --text-color: #fff;
+  position: relative;
+    transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+	background-image: linear-gradient(to right, var(--text-color) 0%, var(--text-color) 49.99%, var(--highlight-color) 50%, var(--highlight-color) 100%);
+//  background-position: -50% -50%;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-size: 200%;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+
+  &:hover {
+  background-size: 200%;
+  background-position: 0 100%;
+
+  }
+}
+
+.link-wipeBgColor-green {
+  --highlight-color: #{$woodland-green};
+}
+.link-wipeBgColor-yellow {
+  --highlight-color: #{$honey-yellow};
+}

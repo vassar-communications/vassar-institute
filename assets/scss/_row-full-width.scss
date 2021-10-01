@@ -1,0 +1,20 @@
+/*
+
+
+On return:
+- Set up full-width styling
+- Get animation working
+
+
+*/
+
+
+.component--fullWidth-fullHeight {
+  height: 100vh;
+  min-height: 100vh;
+  padding: 0;
+
+  .content {
+      max-width: none;
+  }
+}

@@ -6,6 +6,7 @@ $woodland-green: #3a4527;
 $vassar-gold: #c6aa76;
 $vassar-gold-light: #ead6af;
 $satin-linen: #ebebdc;
+$honey-yellow: #edb32e;
 
 $hide-junk: true;
 
@@ -29,6 +30,21 @@ $hide-junk: true;
   --fadeout-color: #{$vassar-gold};
   background-color: $vassar-gold;
 }
+.bg-honey-yellow {
+  --fadeout-color: #{$honey-yellow};
+  background-color: $honey-yellow;
+}
+
+.accent-woodland-green {
+  --accent-color: #{$woodland-green};
+}
+.accent-vassar-gold {
+  --accent-color: #{$vassar-gold};
+}
+.accent-honey-yellow {
+  --accent-color: #{$honey-yellow};
+}
+
 
 .color-cold-steel {
   &,
@@ -72,21 +88,21 @@ $hide-junk: true;
 .cover-photo-scroll-in {
   background-attachment: fixed;
   padding-top: 100vh;
+}
 
-  &.content-transitions-in {
-    padding-top: 14rem;
+.content-transitions-in {
+  padding-top: 14rem;
 
+  .content {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transition: 1s all ease;
+  }
+
+  &.top-25pfrom-topOfWindow {
     .content {
-      opacity: 0;
-      clip-path: inset(0 100% 0 0);
-      transition: 1s all ease;
-    }
-
-    &.top-25pfrom-topOfWindow {
-      .content {
-        opacity: 1;
-        clip-path: inset(0 0 0 -1.4rem);
-      }
+      opacity: 1;
+      clip-path: inset(0 0 0 -1.4rem);
     }
   }
 }
@@ -166,12 +182,19 @@ h2 {
   .content {
     &:before {
       mix-blend-mode: multiply;
+      opacity: 0.7;
     }
   }
 }
 
 .tape-gold {
   --tape-bg: #{$vassar-gold};
+}
+.tape-yellow {
+  --tape-bg: #{$honey-yellow};
+}
+.tape-green {
+  --tape-bg: #{$woodland-green};
 }
 
 .content-align-middle {
@@ -463,6 +486,13 @@ $line-color: #fff;
 }
 
 /* END CROSSROADS COVER */
+
+
+.has-accent {
+    &.title-content {
+        border-left: 0.6em solid var(--accent-color, #aaa);
+    }
+}
 
 
 
