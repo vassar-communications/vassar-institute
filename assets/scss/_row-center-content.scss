@@ -1,0 +1,13 @@
+.center-content-vertically {
+  .content .field--name-field-main-content-body {
+      display: flex;
+      align-items: center;
+  }
+}
+
+.center-content-items-vertically {
+  .content.py-3 {
+    display: flex;
+    align-items: center;
+  }
+}

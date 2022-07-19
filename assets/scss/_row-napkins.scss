@@ -1,0 +1,45 @@
+.napkins-container {
+    padding: 4vw;
+    gap: 4vw;
+
+    @include break('medium') {
+      display: flex;
+    }
+
+    .napkin {
+      opacity: 0;
+      transform: scale(1.2);
+      transition: 1s;
+
+      &:nth-child(2) {
+        transition-delay: 0.4s;
+      }
+      &:nth-child(3) {
+        transition-delay: 0.8s;
+      }
+    }
+}
+.bg-cardboard {
+  background: url(https://www.vassar.edu/sites/default/files/2021-10/napkins-bg_09.jpg);
+    background-size: 24rem;
+
+}
+.component--napkins-container {
+  &.top-50pfrom-topOfWindow { // :not(.temp-reveal)
+    .napkin {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+.field--name-field-main-content-body {
+    width: 100vw;
+    min-height: 100vh;
+    top: 0;
+    display: flex;
+    align-items: center;
+
+    @include break('medium') {
+      position: fixed;
+    }
+  }
+}

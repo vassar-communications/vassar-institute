@@ -1,0 +1,40 @@
+$breakpoints: (
+	small: 30em,
+	medium: 40em,
+	large: 70em,
+);
+
+@mixin break($break, $min-or-max:'min') {
+	/*	Sets up a media query. This expects that all of a project's breakpoints will
+	    be stored in a map named $breakpoints, as follows:
+$breakpoints: (
+	"small": 30em,
+	"medium": 50em,
+	"large": 70em
+);
+	*/
+
+	$screen-size: map-get($breakpoints, $break);
+	@media screen and (#{$min-or-max}-width: $screen-size) {
+		@content;
+	}
+}
+
+/*
+https://stackoverflow.com/questions/22842992/how-to-force-safari-to-repaint-positionfixed-elements-on-scroll
+
+
+@keyframes repaint {
+  from {
+    width: 99.999%
+  }
+  to {
+    width: 100%
+  }
+}
+
+.top-50pfrom-topOfWindow {
+  animation: repaint 5000ms;
+}
+
+*/

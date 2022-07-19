@@ -1,0 +1,96 @@
+.tile-collage {
+  .tile-reveal {
+    width: 100%;
+    height: 10vw;
+    position: relative;
+
+    img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-position: left;
+    }
+  }
+
+  .tile-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+
+      @include break('medium') {
+        width: calc(100vw - 30rem);
+      }
+  }
+
+  .field--name-field-main-content-body {
+      display: flex;
+      flex-flow: column;
+
+      @include break('medium') {
+        flex-flow: row;
+      }
+  }
+
+  .section-content {
+      max-width: 30rem;
+      display: flex;
+      align-items: center;
+      padding: 6vw;
+
+      @include break('medium') {
+        padding: 3rem 4rem 3rem 2rem;
+        min-height: 100vh;
+      }
+  }
+
+  .tile-reveal {
+    padding-bottom: 10rem;
+
+    @include break('medium') {
+      padding-bottom: 50vh;
+    }
+  }
+
+
+  .tile-reveal {
+    width: 100%;
+  //  height: 30em;
+//    background: #f00;
+
+    &:nth-child(2) .curtain {
+      transition-delay: 0.2s;
+    }
+    &:nth-child(3) .curtain {
+      transition-delay: 0.4s;
+    }
+    &:nth-child(4) .curtain {
+      transition-delay: 0.6s;
+    }
+
+  }
+  .curtain {
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
+    background: var(--fadeout-color, #fff);
+    clip-path: polygon(100% 0, 100% 100%, 0% 100%, 0 0);
+    transition: 1s all ease;
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+
+
+  }
+  &.top-50pfrom-topOfWindow {
+    animation: repaint 5000ms;
+  }
+  &.top-50pfrom-topOfWindow,
+  body:not(.js) & {
+    .curtain {
+      width: 100%;
+      height: 100%;
+      background: var(--fadeout-color, #fff);
+      clip-path: polygon(100% 0, 100% 100%, 0% 100%, 0 100%);
+    }
+  }
+}

@@ -9,8 +9,18 @@ On return:
 */
 
 
+.row {
+  display: block;
+
+  @include break('medium') {
+    display: flex;
+  }
+}
+
+.component--fullHeight {
+  min-height: 100vh;
+}
 .component--fullWidth-fullHeight {
-  height: 100vh;
   min-height: 100vh;
   padding: 0;
 

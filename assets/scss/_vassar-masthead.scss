@@ -1,0 +1,32 @@
+a.institute-vassar-masthead__link {
+//  background: rgba(255,255,255,0.4);
+  display: inline-flex;
+  padding: 0.8em;
+//  border-radius: 0.3em;
+//  backdrop-filter: blur(10px);
+
+  padding: 0;
+  position: absolute;
+  width: 10rem;
+  left: 2rem;
+  top: 2rem;
+  z-index: 10;
+
+  svg {
+      fill: #222; // #741320;
+  }
+
+  &:hover {
+    background-color: rgba(255,255,255,1) !important;
+
+    svg {
+        fill: #741320;
+        fill: $corduroy;
+    }
+  }
+}
+
+
+p a.institute-vassar-masthead__link:not(.btn):hover {
+    background-color: transparent !important;
+}

@@ -2,25 +2,87 @@ $sans-serif: "futura-pt", sans-serif;
 $sans-serif-display: "futura-pt-condensed", sans-serif;
 $serif: masqualero, serif;
 
+$vassar-burgundy: #951829;
 $woodland-green: #3a4527;
 $vassar-gold: #c6aa76;
 $vassar-gold-light: #ead6af;
+
 $satin-linen: #ebebdc;
 $honey-yellow: #edb32e;
+$honey-yellow-dark: #BF8808;
+$peach: #f3ac94;
+$corduroy: #576d6c;
+$river-blue: #0c123f;
+$river-blue-light: #272e64;
 
 $hide-junk: true;
 
+$breakpoint-md: 40em;
+
+// hides the universal nav
+header#header {
+  display: none;
+}
+div#toolbar-administration {
+  display: none;
+}
+body#top {
+  padding-top: 0 !important;
+}
+
+//  skip link isn't taking the user to the main content area on this
+//  site; removing it allows the user to tab directly to the masthead
+//  and site nav
+.skip-link {
+  display: none !important;
+}
+
 @if $hide-junk == true {
   nav.tabs,
-  .highlighted,
-  header#header,
-  div#toolbar-administration {
+  .highlighted {
     display: none;
   }
-  body#top {
-    padding-top: 0 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes fadein-backup {
+  from {
+    opacity: 0;
+          transform: translateX(0);
+  }
+  to {
+    opacity: 1;
+          transform: translateX(0);
   }
 }
+
+@keyframes fadein-wipe-backup {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+
+body:not(.js) {
+  .cover-title,
+  .cover-tagline {
+    opacity: 0;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-name: fadein-backup;
+    animation-fill-mode: forwards;
+  }
+}
+
 
 .bg-woodland-green {
   --fadeout-color: #{$woodland-green};
@@ -30,9 +92,29 @@ $hide-junk: true;
   --fadeout-color: #{$vassar-gold};
   background-color: $vassar-gold;
 }
+.bg-vassar-gold-light {
+  --fadeout-color: #{$vassar-gold-light};
+  background-color: $vassar-gold-light;
+}
 .bg-honey-yellow {
   --fadeout-color: #{$honey-yellow};
   background-color: $honey-yellow;
+}
+.bg-satin-linen {
+  --fadeout-color: #{$satin-linen};
+  background-color: $satin-linen;
+}
+.bg-peach {
+  --fadeout-color: #{$peach};
+  background-color: $peach;
+}
+.bg-corduroy {
+  --fadeout-color: #{$corduroy};
+  background-color: $corduroy;
+}
+.bg-river-blue {
+  --fadeout-color: #{$river-blue};
+  background-color: $river-blue;
 }
 
 .accent-woodland-green {
@@ -45,6 +127,12 @@ $hide-junk: true;
   --accent-color: #{$honey-yellow};
 }
 
+.text-color-honey-yellow {
+  &,
+  * {
+    color: $honey-yellow;
+  }
+}
 
 .color-cold-steel {
   &,
@@ -64,10 +152,22 @@ $hide-junk: true;
     color: #576d6c;
   }
 }
+.color-peach {
+  &,
+  * {
+    color: $peach;
+  }
+}
 .color-white {
   &,
   * {
     color: #fff;
+  }
+}
+.color-black {
+  &,
+  * {
+    color: #000;
   }
 }
 
@@ -87,38 +187,106 @@ $hide-junk: true;
 }
 .cover-photo-scroll-in {
   background-attachment: fixed;
-  padding-top: 100vh;
+  padding-top: 108vh;
 }
 
-.content-transitions-in {
-  padding-top: 14rem;
+//  This is if you want to hardcode a div
+.content-transitions-in:not(.component--main-content) {
+  opacity: 0;
+  transition: 2s all ease;
 
-  .content {
-    opacity: 0;
+  &.wipe-from-left {
     clip-path: inset(0 100% 0 0);
-    transition: 1s all ease;
   }
-
-  &.top-25pfrom-topOfWindow {
-    .content {
+  &.wipe-from-center {
+    clip-path: inset(0 100% 0 100%);
+  }
+//  .top-25pfrom-topOfWindow & {
+  .top-50pfrom-topOfWindow & {
       opacity: 1;
-      clip-path: inset(0 0 0 -1.4rem);
+      clip-path: inset(0 0 0 0);
+    }
+}
+
+
+body:not(.js) {
+  .content-transitions-in {
+    &,
+    .content {
+      opacity: 0;
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-name: fadein-wipe-backup;
+      animation-fill-mode: forwards;
     }
   }
 }
 
-h2 {
-  font-family: $sans-serif-display;
-  font-size: 6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  line-height: 0.9;
+
+// This is for applying a wipe effect to the content area
+//  of a component
+.component--main-content.content-transitions-in {
+//  padding-top: 14rem;
+  .content {
+    opacity: 0;
+    transition: 1s all ease;
+  }
+
+  &.wipe-from-left {
+    .content {
+      clip-path: inset(0 100% 0 0);
+    }
+    &.title-outside-content {
+      .content {
+        clip-path: inset(-90vh 100% 0 100%);
+      }
+    }
+
+//    &.top-25pfrom-topOfWindow {
+    &.top-50pfrom-topOfWindow {
+      .content {
+        opacity: 1;
+        clip-path: inset(0 0 0 -1.4rem);
+      }
+      &.title-outside-content {
+        .content {
+          clip-path: inset(-90vh 0 0 -1.4rem);
+        }
+      }
+
+    }
+  }
+
+  &.wipe-from-center {
+    .content {
+      clip-path: inset(0 100% 0 100%);
+    }
+    &.title-outside-content {
+      .content {
+        clip-path: inset(-90vh 100% 0 100%);
+      }
+    }
+
+//    &.top-25pfrom-topOfWindow {
+    &.top-50pfrom-topOfWindow {
+      .content {
+        opacity: 1;
+        clip-path: inset(0 0 0 -1.4rem);
+      }
+      &.title-outside-content {
+        .content {
+          clip-path: inset(-90vh 0 0 -1.4rem);
+        }
+      }
+    }
+
+  }
 }
 
 .component.title-outside-content {
   h2.main-content-display-title {
     position: absolute;
-    margin-top: -90vh !important;
+    margin-top: -46vh !important;
     text-align: center;
     width: 100%;
     left: 0;
@@ -134,6 +302,23 @@ h2 {
   }
 }
 
+h2.section-title--quirky {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+
+  .title-content {
+    background: #fff;
+    color: #333;
+    padding: 0.8em 1.1em;
+    font-family: $sans-serif-display;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 3rem;
+  }
+}
+
 .style-block {
   position: absolute;
   height: 1px;
@@ -145,18 +330,22 @@ h2 {
     background: #fff;
     margin-bottom: 4em;
     max-width: 54rem;
-    padding: 6em !important;
     position: relative;
+    padding: 6vw !important;
 
-    &:before {
-      position: absolute;
-      content: "";
-      top: 3em;
-      bottom: 3em;
-      left: -1.3em;
-      width: 2.6em;
-      background: var(--tape-bg, #f00);
-      border-bottom: 1em solid var(--tape-accent, #f00);
+    @include break('medium') {
+      padding: 6em !important;
+
+      &:before {
+        position: absolute;
+        content: "";
+        top: 3em;
+        bottom: 3em;
+        left: -1.3em;
+        width: 2.6em;
+        background: var(--tape-bg, #f00);
+        border-bottom: 1em solid var(--tape-accent, #f00);
+      }
     }
   }
 }
@@ -220,12 +409,20 @@ h2 {
   }
 }
 
+.title-has-script {
+  @include break('medium', 'max') {
+    span {
+      display: block;
+    }
+  }
+}
+
 .scripty {
   font-family: professor;
 
   h2 & {
     text-transform: none;
-    font-size: 146%;
+//    font-size: 146%;
     letter-spacing: 0;
     font-weight: normal;
   }
@@ -269,6 +466,17 @@ h2 {
   }
 }
 
+
+.is-safari,
+.is-ios {
+  .fixed-content-cover {
+    .field--name-field-main-content-body {
+      position: absolute;
+    }
+  }
+}
+
+
 .end-gradient:after {
   position: absolute;
   content: "";
@@ -280,6 +488,19 @@ h2 {
     var(--fadeout-color, #aaa) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+
+@include break('medium', 'max') {
+  .fix-slide-bg-on-mobile {
+    background-size: contain !important;
+    background-position: top !important;
+    background-attachment: inherit !important;
+    min-height: fit-content !important;
+    padding-top: var(--image-space-at-top, 21rem) !important;
+  }
+  .space-at-top-14 {
+    --image-space-at-top: 14rem;
+  }
 }
 
 .bg-effect-multiply {
@@ -295,25 +516,29 @@ h2 {
       background-position: 98% -4%;
     }
   }
-  &.bg-size-60 {
-    &:not(.bg-zoom-in-on-scroll) {
-      background-size: 60%;
-    }
-    &.bg-zoom-in-on-scroll {
-      background-size: 0%;
-      transition: 1s background-size ease-in;
-
-      &.top-25pfrom-topOfWindow {
+  @include break('medium') {
+    &.bg-size-60 {
+      &:not(.bg-zoom-in-on-scroll) {
         background-size: 60%;
+      }
+      &.bg-zoom-in-on-scroll {
+        background-size: 0%;
+        transition: 1s background-size ease-in;
+
+        &.top-25pfrom-topOfWindow {
+          background-size: 60%;
+        }
       }
     }
   }
-  &.bg-slide-in-from-right {
-    background-position: 100vw;
-    transition: 2s background-position ease-out;
+  @include break('medium') {
+    &.bg-slide-in-from-right {
+      background-position: 100vw;
+      transition: 2s background-position ease-out;
 
-    &.top-25pfrom-topOfWindow {
-      background-position: 100%;
+      &.top-25pfrom-topOfWindow {
+        background-position: 100%;
+      }
     }
   }
 }
@@ -322,7 +547,9 @@ h2 {
   background-size: contain !important;
 }
 .bg-fixed {
-  background-attachment: fixed;
+  @include break('medium') {
+    background-attachment: fixed;
+  }
 }
 
 .stacked-title {
@@ -349,143 +576,6 @@ h2 {
   }
 }
 
-/*  CROSSROADS COVER
-*/
-
-$line-color: #fff;
-
-.crossroads-text {
-  margin-top: 30vh;
-  transform: translateX(-4em);
-}
-.cover-tagline {
-  transform: translateY(-4em);
-}
-.crossroads-text,
-.cover-tagline {
-  text-align: center;
-  transition: 2s transform ease;
-  transition-property: transform, opacity;
-  width: 100%;
-  opacity: 0;
-}
-.top-50pfrom-topOfWindow {
-  .crossroads-text,
-  .cover-tagline {
-    opacity: 1;
-  }
-  .crossroads-text {
-    transform: translateX(0);
-  }
-  .cover-tagline {
-    transform: translateY(0);
-  }
-}
-//.world {
-//  background: #aaa;
-// }
-.canvas-area {
-  transform: perspective(0.4em);
-  transform-style: preserve-3d;
-}
-
-.horizon {
-  background: #aaa;
-  width: 100%;
-  height: 20em;
-  position: absolute;
-  top: 14.4em;
-}
-
-.world {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-@keyframes slidein {
-  0% {
-    left: 0;
-    background-size: 1em;
-    width: 0%;
-    opacity: 1;
-  }
-  50% {
-    background-size: 14em;
-    width: 400%;
-    left: 0%;
-    opacity: 1;
-  }
-  100% {
-    background-size: 1em;
-    width: 0%;
-    left: 100%;
-    opacity: 0;
-  }
-}
-
-.horiz-line {
-  background: repeating-linear-gradient(
-    90deg,
-    #{$line-color},
-    #{$line-color} 50%,
-    transparent 50%,
-    transparent 100%
-  );
-  height: 0.4em;
-  background-repeat: repeat-x;
-  transition: 3s all ease;
-  position: absolute;
-  top: 50vh;
-  left: 0;
-  background-size: 2em;
-  width: 0%;
-  opacity: 0.4;
-
-  .top-50pfrom-topOfWindow & {
-    animation-name: slidein;
-    animation-duration: 0.8s;
-    animation-timing-function: ease-in;
-    animation-delay: 0.4s;
-  }
-}
-
-.center-line {
-  width: 1em;
-  height: 20vh;
-  background: transparent;
-  //  background: #999;
-  margin: 0 auto;
-  transform: rotateX(20deg);
-  position: relative;
-  overflow: hidden;
-  z-index: 10;
-  margin-top: 20vh;
-}
-
-.zoom {
-  width: 100%;
-  height: 20vh;
-  transition: 2s all ease;
-  position: absolute;
-  top: 20vh;
-  transition-timing-function: linear;
-  opacity: 0.4;
-
-  background: repeating-linear-gradient(
-    180deg,
-    #{$line-color},
-    #{$line-color} 10px,
-    transparent 10px,
-    transparent 20px
-  );
-}
-
-.top-50pfrom-topOfWindow .zoom {
-  top: -20vh;
-}
-
-/* END CROSSROADS COVER */
 
 
 .has-accent {
@@ -494,9 +584,17 @@ $line-color: #fff;
     }
 }
 
-
-
+//  Eliminates the gap at the footer
+.main-col.pb-3 {
+    padding-bottom: 0 !important;
+}
+footer.site-footer.default #footer-nav-info {
+    border: none !important;
+}
+.pt-100vh {
+  padding-top: 100vh;
+}
 
 .hidden {
-  display: none;
+  display: none !important;
 }

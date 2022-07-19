@@ -1,0 +1,44 @@
+/*  This is for the previous Summer Institute pages that were moved into Drupal.
+*/
+
+.field--name-field-hero-image-display-title {
+  span {
+    font-family: $serif !important;
+  }
+}
+.content .menu a {
+    font-family: "futura-pt", sans-serif;
+    font-weight: bold;
+}
+.component .content h1.main-content-display-title {
+    font-family: "futura-pt-condensed", sans-serif !important;
+    font-weight: bold !important;
+    color: #272e64;
+}
+
+.component--main-content .content h2.main-content-display-title,
+.component--main-content .content .two-column-display-title {
+  font-family: "futura-pt-condensed", sans-serif !important;
+  letter-spacing: normal;
+  font-weight: normal;
+  @include font-size(4rem);
+  color: #272e64;
+
+ .field__item {
+    font-family: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+    font-size: inherit !important;
+    color: inherit;
+  }
+}
+
+summary {
+    font-family: "futura-pt", sans-serif;
+}
+
+
+//  We're hiding the nav
+.component--secondary-navigation {
+    display: none;
+}

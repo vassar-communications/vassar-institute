@@ -1,0 +1,32 @@
+.fixed-content {
+  position: relative;
+
+  .content {
+    @include break('medium') {
+      position: absolute;
+      clip: rect(0, auto, auto, 0);
+      width: 100%;
+      height: 100%;
+      top: 0;
+    }
+
+    max-width: none;
+  }
+  .field--name-field-main-content-body {
+    @include break('medium') {
+      top: 0;
+      width: 100%;
+      height: 100%;
+      will-change: scroll-position;
+      position: fixed;
+    }
+  }
+}
+
+
+.is-safari .fixed-content .field--name-field-main-content-body,
+.is-ios .fixed-content .field--name-field-main-content-body {
+  @include break('medium') {
+    position: absolute;
+  }
+}

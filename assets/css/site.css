@@ -1,12 +1,74 @@
-nav.tabs,
-.highlighted,
-header#header,
+@charset "UTF-8";
+/*
+https://stackoverflow.com/questions/22842992/how-to-force-safari-to-repaint-positionfixed-elements-on-scroll
+
+
+@keyframes repaint {
+  from {
+    width: 99.999%
+  }
+  to {
+    width: 100%
+  }
+}
+
+.top-50pfrom-topOfWindow {
+  animation: repaint 5000ms;
+}
+
+*/
+header#header {
+  display: none;
+}
+
 div#toolbar-administration {
   display: none;
 }
 
 body#top {
   padding-top: 0 !important;
+}
+
+.skip-link {
+  display: none !important;
+}
+
+nav.tabs,
+.highlighted {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fadein-backup {
+  from {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadein-wipe-backup {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+body:not(.js) .cover-title,
+body:not(.js) .cover-tagline {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-name: fadein-backup;
+  animation-fill-mode: forwards;
 }
 
 .bg-woodland-green {
@@ -19,9 +81,34 @@ body#top {
   background-color: #c6aa76;
 }
 
+.bg-vassar-gold-light {
+  --fadeout-color: #ead6af;
+  background-color: #ead6af;
+}
+
 .bg-honey-yellow {
   --fadeout-color: #edb32e;
   background-color: #edb32e;
+}
+
+.bg-satin-linen {
+  --fadeout-color: #ebebdc;
+  background-color: #ebebdc;
+}
+
+.bg-peach {
+  --fadeout-color: #f3ac94;
+  background-color: #f3ac94;
+}
+
+.bg-corduroy {
+  --fadeout-color: #576d6c;
+  background-color: #576d6c;
+}
+
+.bg-river-blue {
+  --fadeout-color: #0c123f;
+  background-color: #0c123f;
 }
 
 .accent-woodland-green {
@@ -34,6 +121,11 @@ body#top {
 
 .accent-honey-yellow {
   --accent-color: #edb32e;
+}
+
+.text-color-honey-yellow,
+.text-color-honey-yellow * {
+  color: #edb32e;
 }
 
 .color-cold-steel,
@@ -51,9 +143,19 @@ body#top {
   color: #576d6c;
 }
 
+.color-peach,
+.color-peach * {
+  color: #f3ac94;
+}
+
 .color-white,
 .color-white * {
   color: #fff;
+}
+
+.color-black,
+.color-black * {
+  color: #000;
 }
 
 .bg-vassar-gold-light {
@@ -74,33 +176,67 @@ body#top {
 
 .cover-photo-scroll-in {
   background-attachment: fixed;
-  padding-top: 100vh;
+  padding-top: 108vh;
 }
 
-.content-transitions-in {
-  padding-top: 14rem;
-}
-.content-transitions-in .content {
+.content-transitions-in:not(.component--main-content) {
   opacity: 0;
+  transition: 2s all ease;
+}
+.content-transitions-in:not(.component--main-content).wipe-from-left {
   clip-path: inset(0 100% 0 0);
+}
+.content-transitions-in:not(.component--main-content).wipe-from-center {
+  clip-path: inset(0 100% 0 100%);
+}
+.top-50pfrom-topOfWindow .content-transitions-in:not(.component--main-content) {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+body:not(.js) .content-transitions-in,
+body:not(.js) .content-transitions-in .content {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-name: fadein-wipe-backup;
+  animation-fill-mode: forwards;
+}
+
+.component--main-content.content-transitions-in .content {
+  opacity: 0;
   transition: 1s all ease;
 }
-.content-transitions-in.top-25pfrom-topOfWindow .content {
+.component--main-content.content-transitions-in.wipe-from-left .content {
+  clip-path: inset(0 100% 0 0);
+}
+.component--main-content.content-transitions-in.wipe-from-left.title-outside-content .content {
+  clip-path: inset(-90vh 100% 0 100%);
+}
+.component--main-content.content-transitions-in.wipe-from-left.top-50pfrom-topOfWindow .content {
   opacity: 1;
   clip-path: inset(0 0 0 -1.4rem);
 }
-
-h2 {
-  font-family: "futura-pt-condensed", sans-serif;
-  font-size: 6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  line-height: 0.9;
+.component--main-content.content-transitions-in.wipe-from-left.top-50pfrom-topOfWindow.title-outside-content .content {
+  clip-path: inset(-90vh 0 0 -1.4rem);
+}
+.component--main-content.content-transitions-in.wipe-from-center .content {
+  clip-path: inset(0 100% 0 100%);
+}
+.component--main-content.content-transitions-in.wipe-from-center.title-outside-content .content {
+  clip-path: inset(-90vh 100% 0 100%);
+}
+.component--main-content.content-transitions-in.wipe-from-center.top-50pfrom-topOfWindow .content {
+  opacity: 1;
+  clip-path: inset(0 0 0 -1.4rem);
+}
+.component--main-content.content-transitions-in.wipe-from-center.top-50pfrom-topOfWindow.title-outside-content .content {
+  clip-path: inset(-90vh 0 0 -1.4rem);
 }
 
 .component.title-outside-content h2.main-content-display-title {
   position: absolute;
-  margin-top: -90vh !important;
+  margin-top: -46vh !important;
   text-align: center;
   width: 100%;
   left: 0;
@@ -114,6 +250,22 @@ h2 {
   letter-spacing: 0.12em;
 }
 
+h2.section-title--quirky {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+}
+h2.section-title--quirky .title-content {
+  background: #fff;
+  color: #333;
+  padding: 0.8em 1.1em;
+  font-family: "futura-pt-condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 3rem;
+}
+
 .style-block {
   position: absolute;
   height: 1px;
@@ -124,18 +276,31 @@ h2 {
   background: #fff;
   margin-bottom: 4em;
   max-width: 54rem;
-  padding: 6em !important;
   position: relative;
+  padding: 6vw !important;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
 }
-.content-has-tape .content:before {
-  position: absolute;
-  content: "";
-  top: 3em;
-  bottom: 3em;
-  left: -1.3em;
-  width: 2.6em;
-  background: var(--tape-bg, #f00);
-  border-bottom: 1em solid var(--tape-accent, #f00);
+@media screen and (min-width: 40em) {
+  .content-has-tape .content {
+    padding: 6em !important;
+  }
+  .content-has-tape .content:before {
+    position: absolute;
+    content: "";
+    top: 3em;
+    bottom: 3em;
+    left: -1.3em;
+    width: 2.6em;
+    background: var(--tape-bg, #f00);
+    border-bottom: 1em solid var(--tape-accent, #f00);
+  }
 }
 
 .image-two-cols {
@@ -189,12 +354,27 @@ h2 {
   font-size: 1.6rem;
 }
 
+.title-has-script {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (max-width: 40em) {
+  .title-has-script span {
+    display: block;
+  }
+}
+
 .scripty {
   font-family: professor;
 }
 h2 .scripty {
   text-transform: none;
-  font-size: 146%;
   letter-spacing: 0;
   font-weight: normal;
 }
@@ -235,6 +415,11 @@ h2 .scripty {
   left: calc(50vw - 15em);
 }
 
+.is-safari .fixed-content-cover .field--name-field-main-content-body,
+.is-ios .fixed-content-cover .field--name-field-main-content-body {
+  position: absolute;
+}
+
 .end-gradient:after {
   position: absolute;
   content: "";
@@ -244,10 +429,50 @@ h2 .scripty {
   background: linear-gradient(to top, var(--fadeout-color, #aaa) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
+/*	Sets up a media query. This expects that all of a project's breakpoints will
+	    be stored in a map named $breakpoints, as follows:
+$breakpoints: (
+	"small": 30em,
+	"medium": 50em,
+	"large": 70em
+);
+	*/
+@media screen and (max-width: 40em) {
+  .fix-slide-bg-on-mobile {
+    background-size: contain !important;
+    background-position: top !important;
+    background-attachment: inherit !important;
+    min-height: fit-content !important;
+    padding-top: var(--image-space-at-top, 21rem) !important;
+  }
+
+  .space-at-top-14 {
+    --image-space-at-top: 14rem;
+  }
+}
 .bg-effect-multiply {
   background-blend-mode: multiply;
 }
 
+.component--main-content.bg,
+.component--main-content-basic.bg {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
 .component--main-content.bg.bg-right,
 .component--main-content-basic.bg.bg-right {
   background-position: right;
@@ -256,27 +481,31 @@ h2 .scripty {
 .component--main-content-basic.bg.bg-right.bg-offset-1 {
   background-position: 98% -4%;
 }
-.component--main-content.bg.bg-size-60:not(.bg-zoom-in-on-scroll),
+@media screen and (min-width: 40em) {
+  .component--main-content.bg.bg-size-60:not(.bg-zoom-in-on-scroll),
 .component--main-content-basic.bg.bg-size-60:not(.bg-zoom-in-on-scroll) {
-  background-size: 60%;
-}
-.component--main-content.bg.bg-size-60.bg-zoom-in-on-scroll,
+    background-size: 60%;
+  }
+  .component--main-content.bg.bg-size-60.bg-zoom-in-on-scroll,
 .component--main-content-basic.bg.bg-size-60.bg-zoom-in-on-scroll {
-  background-size: 0%;
-  transition: 1s background-size ease-in;
-}
-.component--main-content.bg.bg-size-60.bg-zoom-in-on-scroll.top-25pfrom-topOfWindow,
+    background-size: 0%;
+    transition: 1s background-size ease-in;
+  }
+  .component--main-content.bg.bg-size-60.bg-zoom-in-on-scroll.top-25pfrom-topOfWindow,
 .component--main-content-basic.bg.bg-size-60.bg-zoom-in-on-scroll.top-25pfrom-topOfWindow {
-  background-size: 60%;
+    background-size: 60%;
+  }
 }
-.component--main-content.bg.bg-slide-in-from-right,
+@media screen and (min-width: 40em) {
+  .component--main-content.bg.bg-slide-in-from-right,
 .component--main-content-basic.bg.bg-slide-in-from-right {
-  background-position: 100vw;
-  transition: 2s background-position ease-out;
-}
-.component--main-content.bg.bg-slide-in-from-right.top-25pfrom-topOfWindow,
+    background-position: 100vw;
+    transition: 2s background-position ease-out;
+  }
+  .component--main-content.bg.bg-slide-in-from-right.top-25pfrom-topOfWindow,
 .component--main-content-basic.bg.bg-slide-in-from-right.top-25pfrom-topOfWindow {
-  background-position: 100%;
+    background-position: 100%;
+  }
 }
 
 .bg-size-contain {
@@ -284,7 +513,19 @@ h2 .scripty {
 }
 
 .bg-fixed {
-  background-attachment: fixed;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .bg-fixed {
+    background-attachment: fixed;
+  }
 }
 
 .stacked-title {
@@ -307,6 +548,543 @@ h2 .scripty {
   mix-blend-mode: multiply;
 }
 
+.has-accent.title-content {
+  border-left: 0.6em solid var(--accent-color, #aaa);
+}
+
+.main-col.pb-3 {
+  padding-bottom: 0 !important;
+}
+
+footer.site-footer.default #footer-nav-info {
+  border: none !important;
+}
+
+.pt-100vh {
+  padding-top: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*
+
+
+On return:
+- Set up full-width styling
+- Get animation working
+
+
+*/
+.row {
+  display: block;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .row {
+    display: flex;
+  }
+}
+
+.component--fullHeight {
+  min-height: 100vh;
+}
+
+.component--fullWidth-fullHeight {
+  min-height: 100vh;
+  padding: 0;
+}
+.component--fullWidth-fullHeight .content {
+  max-width: none;
+}
+
+.structure-line {
+  opacity: 0;
+}
+
+/*	Sets up a media query. This expects that all of a project's breakpoints will
+	    be stored in a map named $breakpoints, as follows:
+$breakpoints: (
+	"small": 30em,
+	"medium": 50em,
+	"large": 70em
+);
+	*/
+@media screen and (min-width: 40em) {
+  .structure-line {
+    position: absolute;
+    transition: 1s all ease;
+    opacity: 1;
+  }
+
+  .structure-line-1 {
+    top: 8vh;
+    left: 4vw;
+    width: 0;
+    height: 2px;
+  }
+
+  .structure-line-2 {
+    bottom: 8vw;
+    left: 6vw;
+    width: 2vw;
+    height: 0;
+  }
+
+  .structure-line-3 {
+    width: 15em;
+    height: 0;
+    background: url(https://www.vassar.edu/sites/default/files/2021-10/mockup-graphics-_mUVHhvBYZ0-unsplash-copy.jpg);
+    background-size: cover;
+    bottom: 0;
+    right: 25%;
+    opacity: 0.4;
+  }
+
+  .structure-line-4 {
+    right: 7vw;
+    height: 0;
+    top: 13vh;
+    width: 0.3em;
+  }
+
+  .top-25pfrom-topOfWindow .structure-line-1 {
+    width: 50vw;
+  }
+  .top-25pfrom-topOfWindow .structure-line-2 {
+    height: 40vh;
+  }
+  .top-25pfrom-topOfWindow .structure-line-3 {
+    height: 16em;
+  }
+  .top-25pfrom-topOfWindow .structure-line-4 {
+    height: 40vh;
+  }
+}
+:root {
+  --highlight-color: #f00;
+  --highlight-color-2: #00f;
+}
+
+li a.link--wipe:hover {
+  background-color: transparent !important;
+}
+
+@media (hover: hover) {
+  .link--wipe {
+    background-image: linear-gradient(to right, var(--highlight-color) 0%, var(--highlight-color) 100%);
+    text-decoration: none;
+    position: relative;
+    width: auto;
+    background-repeat: no-repeat;
+    background-position: 0px bottom;
+    padding: 0.1% 0px;
+  }
+  .link--wipe, .link--wipe > span {
+    transition: background 0.4s ease;
+  }
+  .link--wipe:hover {
+    background-size: 100% 1px;
+  }
+  .link--wipe {
+    background-size: 0px 100%;
+  }
+  .link--wipe:hover {
+    background-size: 100% 100%;
+  }
+
+  .link--wipe-inner {
+    --text-color: #fff;
+    position: relative;
+    transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
+    background-image: linear-gradient(to right, var(--text-color) 0%, var(--text-color) 49.99%, var(--highlight-color) 50%, var(--highlight-color) 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-size: 200%;
+    background-repeat: no-repeat;
+    background-position: 100% 0;
+    padding: 0 0.26em;
+  }
+  .link--wipe-inner:hover {
+    background-size: 200%;
+    background-position: 0 100%;
+  }
+}
+@media (hover: none) {
+  .link--wipe-inner {
+    color: var(--highlight-color);
+    display: block;
+  }
+}
+.link-wipeBgColor-green {
+  --highlight-color: #3a4527;
+}
+
+.link-wipeBgColor-yellow {
+  --highlight-color: #BF8808;
+}
+
+.link-wipeBgColor-blue {
+  --highlight-color: #576d6c;
+}
+
+.site-nav {
+  text-decoration: none !important;
+}
+
+.site-nav:after {
+  content: "☰";
+  color: #fff;
+  color: #951829;
+  font-size: 1.8rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  background: #fff;
+  width: 2.6rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  transition: 0.4s all ease;
+}
+
+.site-nav:hover:after {
+  background: #951829;
+  color: #fff;
+}
+
+.site-nav {
+  position: fixed;
+  right: 1.6rem;
+  width: 3rem;
+  height: 3rem;
+  top: 1rem;
+}
+
+.site-masthead a:hover,
+a.site-nav:hover {
+  background: transparent !important;
+}
+
+.open-nav {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 100;
+}
+
+.nav-links__container {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.94);
+  width: 100%;
+  height: 0;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  transition: 1s all ease;
+  overflow: hidden;
+}
+@supports (backdrop-filter: blur()) {
+  .nav-links__container {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+.nav-links__container a {
+  font-family: "futura-pt-condensed", sans-serif;
+  font-size: calc(1.925rem + 8.1vw);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+@media (min-width: 1200px) {
+  .nav-links__container a {
+    font-size: 8rem;
+  }
+}
+
+a.site-masthead:not(.btn):hover,
+a.site-masthead:not(.btn):focus,
+.inner-page-masthead a:not(.btn):focus,
+.inner-page-masthead a:not(.btn):active {
+  background-color: transparent !important;
+}
+
+.main-nav {
+  padding: 0;
+  height: 0;
+}
+
+.close-nav {
+  position: absolute;
+  right: 1em;
+  top: 2em;
+}
+
+.nav-links {
+  width: 100%;
+}
+.nav-links li {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: 1s all ease;
+  transition-delay: 0.4s;
+  list-style: none !important;
+  mix-blend-mode: multiply;
+}
+.nav-links li:nth-child(1) {
+  transition-delay: 0.4s;
+}
+.nav-links li:nth-child(2) {
+  transition-delay: 0.6s;
+}
+.nav-links li:nth-child(3) {
+  transition-delay: 0.8s;
+}
+.nav-links ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.nav-open {
+  overflow: hidden;
+}
+.nav-open .nav-links__container {
+  height: 100vh;
+}
+.nav-open .nav-links__container li {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#site-menu:target {
+  height: 100vh;
+}
+#site-menu:target li {
+  opacity: 1;
+  transform: scale(1);
+}
+
+a.close-nav {
+  font-size: 1em;
+  color: transparent;
+  z-index: 1000;
+}
+
+.close-nav {
+  border: none;
+  color: transparent;
+  background: transparent;
+  height: 3rem;
+}
+.close-nav:before, .close-nav:after {
+  content: "";
+  position: absolute;
+  width: 3rem;
+  border-top: 3px solid #f00;
+  height: 1px;
+  top: 1rem;
+  left: 0;
+  opacity: 0;
+  transition: 0.4s all ease;
+}
+.close-nav:hover:before, .close-nav:hover:after {
+  border-width: 8px;
+}
+
+a.close-nav:not(.btn):hover {
+  color: transparent !important;
+  background: transparent !important;
+}
+
+#site-menu:target .close-nav:before, #site-menu:target .close-nav:after,
+.nav-open .close-nav:before,
+.nav-open .close-nav:after {
+  opacity: 1;
+}
+#site-menu:target .close-nav:before,
+.nav-open .close-nav:before {
+  transform: rotate(45deg);
+}
+#site-menu:target .close-nav:after,
+.nav-open .close-nav:after {
+  transform: rotate(-45deg);
+}
+
+#show-the-nav:focus {
+  position: fixed;
+}
+#show-the-nav:focus span {
+  border: 2px solid #f00;
+}
+
+button#show-the-nav {
+  background: transparent;
+  border: none;
+}
+
+.field--name-field-main-content-body h3 {
+  color: #272e64;
+  font-family: "futura-pt", sans-serif;
+  font-size: 2.2rem;
+  line-height: 1.1;
+  position: relative;
+  margin-bottom: 1.8rem;
+}
+.field--name-field-main-content-body h3:after {
+  position: absolute;
+  content: "";
+  width: 4rem;
+  border-top: 0.4rem solid #f3ac94;
+  left: 0;
+  top: 100%;
+}
+
+h2 {
+  font-family: "futura-pt-condensed", sans-serif;
+  font-size: calc(1.725rem + 5.7vw);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 0.9;
+}
+@media (min-width: 1200px) {
+  h2 {
+    font-size: 6rem;
+  }
+}
+
+.napkins-container {
+  padding: 4vw;
+  gap: 4vw;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .napkins-container {
+    display: flex;
+  }
+}
+.napkins-container .napkin {
+  opacity: 0;
+  transform: scale(1.2);
+  transition: 1s;
+}
+.napkins-container .napkin:nth-child(2) {
+  transition-delay: 0.4s;
+}
+.napkins-container .napkin:nth-child(3) {
+  transition-delay: 0.8s;
+}
+
+.bg-cardboard {
+  background: url(https://www.vassar.edu/sites/default/files/2021-10/napkins-bg_09.jpg);
+  background-size: 24rem;
+}
+
+.component--napkins-container.top-50pfrom-topOfWindow .napkin {
+  opacity: 1;
+  transform: scale(1);
+}
+.component--napkins-container .field--name-field-main-content-body {
+  width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  display: flex;
+  align-items: center;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .component--napkins-container .field--name-field-main-content-body {
+    position: fixed;
+  }
+}
+
+.inner-page-masthead {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 6rem;
+  left: calc(50% - 3rem);
+  z-index: 1000;
+}
+.inner-page-masthead .content {
+  padding-top: 0 !important;
+}
+
+@keyframes inner-page-masthead-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.site-masthead {
+  opacity: 0;
+  transform-origin: top center;
+  position: fixed;
+  top: 0;
+  animation-name: inner-page-masthead-appear;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+.site-masthead {
+  transform-origin: top center;
+  display: block;
+  width: 5em;
+  height: 4em;
+  background: transparent;
+  border: none;
+}
+.site-masthead, .site-masthead polygon {
+  transition: 1s all ease;
+}
+
+.site-masthead:hover .cls-1 {
+  fill: #661c2d;
+}
+.site-masthead:hover .cls-2 {
+  fill: #fff;
+}
+
+body:not(.js) .crossroads-cover .crossroads-text,
+body:not(.js) .crossroads-cover .cover-tagline {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-name: fadein-backup;
+  animation-fill-mode: forwards;
+}
+
 /*  CROSSROADS COVER
 */
 .crossroads-text {
@@ -316,6 +1094,8 @@ h2 .scripty {
 
 .cover-tagline {
   transform: translateY(-4em);
+  max-width: 55ch;
+  margin: 0 auto;
 }
 
 .crossroads-text,
@@ -424,22 +1204,378 @@ h2 .scripty {
 }
 
 /* END CROSSROADS COVER */
-.has-accent.title-content {
-  border-left: 0.6em solid var(--accent-color, #aaa);
+@keyframes fadein-backup {
+  from {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+body:not(.js) .cover-anim-salt-line .title-word {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-delay: 1s;
+  animation-name: fadein-backup;
+  animation-fill-mode: forwards;
 }
 
-.hidden {
-  display: none;
+.cover-anim-salt-line .content {
+  background: rgba(237, 179, 46, 0.66);
+}
+.cover-anim-salt-line .world {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cover-anim-salt-line.vertical-unpack-animation .cover-title {
+  line-height: 0;
+  transition: 1s line-height ease;
+}
+.cover-anim-salt-line.vertical-unpack-animation .cover-title > span {
+  display: block;
+  text-align: center;
+}
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word {
+  display: inline-block;
+}
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word {
+  transition: 1s all ease;
+}
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word--the,
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word--line {
+  opacity: 0;
+}
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word--the {
+  transform: translateX(1em);
+}
+.cover-anim-salt-line.horiz-unpack-animation .cover-title .title-word--line {
+  transform: translateX(-1em);
+}
+.js .cover-anim-salt-line.horiz-unpack-animation.top-50pfrom-topOfWindow .title-word--the,
+.js .cover-anim-salt-line.horiz-unpack-animation.top-50pfrom-topOfWindow .title-word--line {
+  transform: translateX(0);
+  opacity: 1;
+}
+.cover-anim-salt-line .animated-middle-line {
+  border-top: 0.6em solid #fff;
+  width: 0;
+  position: fixed;
+  opacity: 1;
+  transition: 1s all ease;
+}
+.cover-anim-salt-line.vertical-unpack-animation.top-50pfrom-topOfWindow .cover-title {
+  line-height: 1;
+}
+.cover-anim-salt-line.top-50pfrom-topOfWindow .animated-middle-line {
+  width: 100%;
+  opacity: 0;
 }
 
-.top-links {
-  font-size: calc(1em + 0.5 * ((100vw - 20em) / 60));
+.tile-collage .tile-reveal {
+  width: 100%;
+  height: 10vw;
+  position: relative;
+}
+.tile-collage .tile-reveal img {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: left;
+}
+.tile-collage .tile-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .tile-collage .tile-container {
+    width: calc(100vw - 30rem);
+  }
+}
+.tile-collage .field--name-field-main-content-body {
+  display: flex;
+  flex-flow: column;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .tile-collage .field--name-field-main-content-body {
+    flex-flow: row;
+  }
+}
+.tile-collage .section-content {
+  max-width: 30rem;
+  display: flex;
+  align-items: center;
+  padding: 6vw;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .tile-collage .section-content {
+    padding: 3rem 4rem 3rem 2rem;
+    min-height: 100vh;
+  }
+}
+.tile-collage .tile-reveal {
+  padding-bottom: 10rem;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .tile-collage .tile-reveal {
+    padding-bottom: 50vh;
+  }
+}
+.tile-collage .tile-reveal {
+  width: 100%;
+}
+.tile-collage .tile-reveal:nth-child(2) .curtain {
+  transition-delay: 0.2s;
+}
+.tile-collage .tile-reveal:nth-child(3) .curtain {
+  transition-delay: 0.4s;
+}
+.tile-collage .tile-reveal:nth-child(4) .curtain {
+  transition-delay: 0.6s;
+}
+.tile-collage .curtain {
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  background: var(--fadeout-color, #fff);
+  clip-path: polygon(100% 0, 100% 100%, 0% 100%, 0 0);
+  transition: 1s all ease;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+}
+.tile-collage.top-50pfrom-topOfWindow {
+  animation: repaint 5000ms;
+}
+.tile-collage.top-50pfrom-topOfWindow .curtain, body:not(.js) .tile-collage .curtain {
+  width: 100%;
+  height: 100%;
+  background: var(--fadeout-color, #fff);
+  clip-path: polygon(100% 0, 100% 100%, 0% 100%, 0 100%);
+}
+
+.content-transition-speed-2s .content {
+  transition-duration: 2s;
+}
+
+.content-wide .content {
+  max-width: 74rem;
+}
+
+.content-padding-0 .content {
+  padding: 0 !important;
+}
+
+html:not(.is-ios) .fixed-bg {
+  background-attachment: fixed;
+}
+
+a.institute-vassar-masthead__link {
+  display: inline-flex;
+  padding: 0.8em;
+  padding: 0;
+  position: absolute;
+  width: 10rem;
+  left: 2rem;
+  top: 2rem;
+  z-index: 10;
+}
+a.institute-vassar-masthead__link svg {
+  fill: #222;
+}
+a.institute-vassar-masthead__link:hover {
+  background-color: white !important;
+}
+a.institute-vassar-masthead__link:hover svg {
+  fill: #741320;
+  fill: #576d6c;
+}
+
+p a.institute-vassar-masthead__link:not(.btn):hover {
+  background-color: transparent !important;
+}
+
+.fixed-content {
+  position: relative;
+}
+.fixed-content .content {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+  max-width: none;
+}
+@media screen and (min-width: 40em) {
+  .fixed-content .content {
+    position: absolute;
+    clip: rect(0, auto, auto, 0);
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+.fixed-content .field--name-field-main-content-body {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .fixed-content .field--name-field-main-content-body {
+    top: 0;
+    width: 100%;
+    height: 100%;
+    will-change: scroll-position;
+    position: fixed;
+  }
+}
+
+.is-safari .fixed-content .field--name-field-main-content-body,
+.is-ios .fixed-content .field--name-field-main-content-body {
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .is-safari .fixed-content .field--name-field-main-content-body,
+.is-ios .fixed-content .field--name-field-main-content-body {
+    position: absolute;
+  }
+}
+
+.component.title-outside-content {
+  padding-top: 4rem;
+  min-height: 100vh;
+}
+.component.title-outside-content .content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  max-width: none;
+  min-height: 100vh;
+}
+.component.title-outside-content h2.main-content-display-title {
+  padding: 0;
+  position: static;
+  margin: 0;
+}
+.component.title-outside-content .title-small-formal {
+  font-size: 3rem;
+}
+
+.center-content-vertically .content .field--name-field-main-content-body {
+  display: flex;
+  align-items: center;
+}
+
+.center-content-items-vertically .content.py-3 {
+  display: flex;
+  align-items: center;
+}
+
+.has-second-bg .content {
+  z-index: 10;
+}
+.has-second-bg:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100%;
+  background: var(--second-background);
+  background-size: contain;
+}
+
+.second-bg-fixed:before {
+  background-attachment: fixed;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cover-title .supertext {
+  opacity: 0;
+  transform: translateY(-1em);
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem auto 2rem auto;
+  animation-duration: 1s;
+  animation-name: slide-up;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  font-family: masqualero, serif;
+  text-align: center;
+  letter-spacing: 0.3em;
+}
+
+.canvas-area {
+  text-align: center;
+}
+
+.cover-tagline.font-intro {
+  padding: 1rem;
 }
 
 .component--instituteLogo {
   --highlight-color: #3a4527;
   --highlight-color-2: #00f;
-  height: 100vh;
   position: relative;
 }
 
@@ -453,14 +1589,8 @@ html {
   0% {
     width: 0;
   }
-  33% {
-    width: 14em;
-  }
-  66% {
-    width: 14em;
-  }
   100% {
-    width: 6em;
+    width: 14em;
   }
 }
 @keyframes text-rise {
@@ -559,13 +1689,12 @@ html {
     opacity: 0;
   }
 }
-@keyframes text-scale {
-  0% {
-    font-size: 3rem;
-  }
-  100% {
-    font-size: 2rem;
-  }
+.institute-logo {
+  width: 0;
+}
+
+.activate .ray {
+  animation-delay: 0.6s;
 }
 .activate .ray-1 {
   animation-duration: 1s;
@@ -588,32 +1717,28 @@ html {
   animation-fill-mode: forwards;
 }
 .activate .institute-logo {
-  animation-duration: 3s;
+  animation-duration: 1s;
   animation-name: logo-rise;
   animation-fill-mode: forwards;
+  animation-delay: 0.6s;
 }
 
 .institute-logo__container {
   width: 100%;
   position: absolute;
-  bottom: 50%;
+  bottom: 0;
   right: 0;
   text-align: center;
 }
 .institute-logo__container .institute-logo {
-  width: 10em;
+  width: 0;
   display: block;
   line-height: 0;
   margin: 0 auto -0.2em auto;
 }
 
 .institute-text__container {
-  margin-top: 50vh;
   text-align: center;
-  animation-duration: 1s;
-  animation-name: text-rise;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
 }
 
 .institute__main-title {
@@ -622,10 +1747,6 @@ html {
   transition: 1s all ease;
   opacity: 0;
   padding-top: 1em;
-  animation-duration: 1s;
-  animation-name: text-scale;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
 }
 
 .activate .institute__main-title {
@@ -633,9 +1754,11 @@ html {
 }
 
 .institute__sub-title {
-  font-family: futura-pt;
-  font-size: 1.4rem;
+  font-family: covik-sans;
+  font-size: 2rem;
   margin-top: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .institute-text__container p {
@@ -658,15 +1781,117 @@ html {
     bottom: calc(100% - 6em);
   }
 }
+/*
 .institute-logo__container {
-  animation-duration: 1s;
-  animation-name: logo-place-top;
+     animation-duration: 1s;
+    animation-name: logo-place-top;
+    animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+*/
+@keyframes background-shift {
+  0% {
+    background: #fff;
+  }
+  100% {
+    background: #ebebdc;
+  }
+}
+.component--instituteLogo {
+  animation-duration: 2s;
+  animation-name: background-shift;
   animation-fill-mode: forwards;
   animation-delay: 2s;
 }
 
+.institute-text__container .logo-line {
+  display: block;
+}
+
+.animated-logo {
+  top: 0;
+  width: 100%;
+  height: 50vh;
+  position: relative;
+}
+
+.ray-1,
+.ray-2,
+.ray-3,
+.ray-4 {
+  top: auto;
+  bottom: 0 !important;
+}
+
+@keyframes scale-down-masthead {
+  0% {
+    transform: scale(1);
+    width: 100%;
+  }
+  100% {
+    transform: scale(0.4);
+    width: 34rem;
+  }
+}
+.institute-masthead {
+  width: 100%;
+  animation-duration: 2s;
+  animation-name: scale-down-masthead;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+  left: 2vw;
+}
+
+@keyframes move-masthead-up {
+  0% {
+    height: 50vh;
+  }
+  100% {
+    height: 10vh;
+  }
+}
+.animated-logo {
+  animation-duration: 2s;
+  animation-name: move-masthead-up;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+@keyframes zoom-in-1 {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.institute-text__container {
+  opacity: 0;
+  transform: scale(0.8);
+  animation-duration: 2s;
+  animation-name: zoom-in-1;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.vassar-logotype {
+  color: #951829;
+  text-transform: uppercase;
+}
+
+.institute-masthead {
+  position: absolute;
+  transform-origin: left;
+}
+
+.card-img {
+  will-change: transform;
+}
+
 .top-links {
-  max-width: 80rem;
+  mix-blend-mode: multiply;
   margin: 0 auto;
 }
 .top-links ul {
@@ -676,10 +1901,23 @@ html {
 .top-links li {
   opacity: 0;
   list-style: none;
-  display: inline;
   animation-duration: 2s;
   animation-name: link-fade-in;
   animation-fill-mode: forwards;
+  margin-bottom: 1.2rem !important;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media screen and (min-width: 40em) {
+  .top-links li {
+    margin-bottom: 0.6rem !important;
+  }
 }
 .top-links li:nth-child(1) {
   animation-delay: 2.2s;
@@ -743,106 +1981,124 @@ html {
 }
 .top-links a {
   font-family: "futura-pt-condensed", sans-serif;
-  font-size: 4em;
+  font-size: calc(1.825rem + 6.9vw);
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
   display: inline-block;
-  padding: 0 0.2em;
   transition: 0.4s all ease;
+  line-height: 0.9;
+  /*	Sets up a media query. This expects that all of a project's breakpoints will
+  	    be stored in a map named $breakpoints, as follows:
+  $breakpoints: (
+  	"small": 30em,
+  	"medium": 50em,
+  	"large": 70em
+  );
+  	*/
+}
+@media (min-width: 1200px) {
+  .top-links a {
+    font-size: 7rem;
+  }
+}
+@media screen and (min-width: 40em) {
+  .top-links a {
+    line-height: 1.2;
+  }
 }
 .top-links a:link, .top-links a:visited {
   color: #3a4527;
 }
-.top-links a:hover {
+.top-links a:link span, .top-links a:visited span {
+  padding: 0 0.2em;
+}
+.top-links a:hover, .top-links a:focus {
   color: #edb32e;
 }
 
-@keyframes background-shift {
-  0% {
-    background: #fff;
+.top-links {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: calc(100% - 10rem);
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-height: 36rem) {
+  .top-links {
+    display: flex;
   }
-  100% {
-    background: #ebebdc;
-  }
 }
-.component--instituteLogo {
-  animation-duration: 2s;
-  animation-name: background-shift;
-  animation-fill-mode: forwards;
-  animation-delay: 2s;
-}
-
-/*
-
-
-On return:
-- Set up full-width styling
-- Get animation working
-
-
-*/
-.component--fullWidth-fullHeight {
-  height: 100vh;
-  min-height: 100vh;
-  padding: 0;
-}
-.component--fullWidth-fullHeight .content {
-  max-width: none;
-}
-
-:root {
-  --highlight-color: #f00;
-  --highlight-color-2: #00f;
-}
-
-li a.link--wipe:hover {
+.top-links li a {
   background-color: transparent !important;
+  display: inline;
 }
 
-.link--wipe {
-  font-size: 1.4em;
-  background-image: linear-gradient(to right, var(--highlight-color) 0%, var(--highlight-color) 100%);
+.vassar-header {
+  font-family: "futura-pt-condensed", sans-serif !important;
+  font-size: 2rem !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
   text-decoration: none;
-  position: relative;
-  width: auto;
-  background-repeat: no-repeat;
-  background-position: 0px bottom;
-  padding: 0.1% 0px;
-}
-.link--wipe, .link--wipe > span {
-  transition: background 0.4s ease;
-}
-.link--wipe:hover {
-  background-size: 100% 1px;
-}
-.link--wipe {
-  background-size: 0px 100%;
-}
-.link--wipe:hover {
-  background-size: 100% 100%;
+  letter-spacing: 0.1em;
+  padding: 0 0.2em;
 }
 
-.link--wipe-inner {
-  --text-color: #fff;
-  position: relative;
-  transition: background 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
-  background-image: linear-gradient(to right, var(--text-color) 0%, var(--text-color) 49.99%, var(--highlight-color) 50%, var(--highlight-color) 100%);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-size: 200%;
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-}
-.link--wipe-inner:hover {
-  background-size: 200%;
-  background-position: 0 100%;
+.unfix-last-section .last-section .field--name-field-main-content-body {
+  position: static;
 }
 
-.link-wipeBgColor-green {
-  --highlight-color: #3a4527;
+/*  This is for the previous Summer Institute pages that were moved into Drupal.
+*/
+.field--name-field-hero-image-display-title span {
+  font-family: masqualero, serif !important;
 }
 
-.link-wipeBgColor-yellow {
-  --highlight-color: #edb32e;
+.content .menu a {
+  font-family: "futura-pt", sans-serif;
+  font-weight: bold;
+}
+
+.component .content h1.main-content-display-title {
+  font-family: "futura-pt-condensed", sans-serif !important;
+  font-weight: bold !important;
+  color: #272e64;
+}
+
+.component--main-content .content h2.main-content-display-title,
+.component--main-content .content .two-column-display-title {
+  font-family: "futura-pt-condensed", sans-serif !important;
+  letter-spacing: normal;
+  font-weight: normal;
+  font-size: calc(1.525rem + 3.3vw);
+  color: #272e64;
+}
+@media (min-width: 1200px) {
+  .component--main-content .content h2.main-content-display-title,
+.component--main-content .content .two-column-display-title {
+    font-size: 4rem;
+  }
+}
+.component--main-content .content h2.main-content-display-title .field__item,
+.component--main-content .content .two-column-display-title .field__item {
+  font-family: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+  font-size: inherit !important;
+  color: inherit;
+}
+
+summary {
+  font-family: "futura-pt", sans-serif;
+}
+
+.component--secondary-navigation {
+  display: none;
+}
+
+footer.default.site-footer {
+  display: none;
 }

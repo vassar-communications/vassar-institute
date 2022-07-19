@@ -1,0 +1,457 @@
+
+.component--instituteLogo {
+  --highlight-color: #3a4527;
+  --highlight-color-2: #00f;
+
+//  height: 100vh;
+  position: relative;
+}
+
+@function has-key($map, $defaults, $key) {
+  @if map-has-key($map, $key) {
+      @return map-get($map, $key);
+    } @else {
+      @return map-get($defaults, $key);
+  }
+}
+
+@mixin bp-sequence($map:(item: 1)) {
+	$defaults: (
+		gap: 0.2s,
+		offset: 2s,
+		max-items: 20,
+		type: animation,
+	);
+
+	$gap: has-key($map, $defaults, gap);
+	$offset: has-key($map, $defaults, offset);
+	$max-items: has-key($map, $defaults, max-items);
+	$type: has-key($map, $defaults, type);
+
+	@for $i from 1 through $max-items {
+		&:nth-child(#{$i}) {
+			#{$type}-delay: $offset + ($gap * $i);
+		}
+	}
+}
+
+$border: 1px solid #c6aa76;
+
+html {
+  margin: 0 !important;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+@keyframes logo-rise {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 14em;
+  }
+}
+
+@keyframes text-rise {
+  0% {
+    margin-top: 50vh;
+  }
+  100% {
+    margin-top: 10vh;
+  }
+}
+
+
+.ray {
+  height: 1px;
+  position: absolute;
+  transition: 1s all ease;
+}
+.ray-1 {
+  border-top: $border;
+  top: 50%;
+  left: 0;
+}
+.ray-2 {
+  border-left: $border;
+  bottom: 50%;
+  left: 50%;
+}
+.ray-3 {
+  border-left: $border;
+  bottom: 50%;
+  left: 50%;
+  transform: rotate(60deg);
+  transform-origin: bottom left;
+}
+.ray-4 {
+  border-left: $border;
+  bottom: calc(50% - 0.1em);
+  left: 50%;
+  transform: rotate(-60deg);
+  transform-origin: bottom left;
+}
+
+@keyframes ray-1 {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+    left: auto;
+    right: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes ray-2 {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 50%;
+  }
+  100% {
+    height: 0%;
+    bottom: auto;
+    top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes ray-3 {
+  0% {
+    height: 0%;
+    transform-origin: bottom left;
+  }
+  50% {
+    height: 100%;
+    transform-origin: bottom left;
+  }
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes ray-4 {
+  0% {
+    height: 0%;
+  }
+  50% {
+    height: 100%;
+  }
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+.institute-logo {
+  width: 0;
+}
+.activate {
+  .ray {
+    animation-delay: 0.6s;
+  }
+  .ray-1 {
+    animation-duration: 1s;
+    animation-name: ray-1;
+    animation-fill-mode: forwards;
+  }
+  .ray-2 {
+    animation-duration: 1s;
+    animation-name: ray-2;
+    animation-fill-mode: forwards;
+  }
+  .ray-3 {
+    animation-duration: 1s;
+    animation-name: ray-3;
+    animation-fill-mode: forwards;
+  }
+  .ray-4 {
+    animation-duration: 1s;
+    animation-name: ray-4;
+    animation-fill-mode: forwards;
+  }
+  .institute-logo {
+    animation-duration: 1s;
+    animation-name: logo-rise;
+    animation-fill-mode: forwards;
+    animation-delay: 0.6s;
+  }
+
+}
+
+.institute-logo__container {
+  width: 100%;
+  position: absolute;
+//  bottom: 50vh;
+//  height: 50vh;
+
+//  height: 100%;
+
+  bottom: 0;
+  right: 0;
+  text-align: center;
+
+  .institute-logo {
+    width: 0;
+    display: block;
+    line-height: 0;
+    margin: 0 auto -0.2em auto;
+  }
+}
+
+
+.institute-text__container {
+    text-align: center;
+}
+.institute__main-title {
+  font-family: masqualero;
+  font-size: 3rem;
+//  clip-path: inset(0 0 0 0);
+  transition: 1s all ease;
+  opacity: 0;
+  padding-top: 1em;
+}
+
+.activate .institute__main-title {
+//  clip-path: inset(0 50% 0 0);
+  opacity: 1;
+}
+.institute__sub-title {
+  font-family: covik-sans;
+  font-size: 2rem;
+  margin-top: 0.2em;
+  text-transform: uppercase;
+      letter-spacing: 0.06em;
+}
+
+.institute-text__container p {
+  margin-bottom: 0;
+}
+
+
+@keyframes link-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes logo-place-top {
+  0% {
+    bottom: 50%;
+//    width: 100%;
+  }
+  100% {
+    bottom: calc(100% - 6em);
+//    width: 14em;
+  }
+}
+
+/*
+.institute-logo__container {
+     animation-duration: 1s;
+    animation-name: logo-place-top;
+    animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+*/
+
+
+
+
+@keyframes background-shift {
+  0% {
+    background: #fff;
+  }
+  100% {
+    background: #ebebdc;
+  }
+}
+
+.component--instituteLogo {
+       animation-duration: 2s;
+    animation-name: background-shift;
+    animation-fill-mode: forwards;
+  animation-delay: 2s;
+}
+
+.institute-text__container {
+  .logo-line {
+    display: block;
+  }
+}
+.animated-logo {
+    top: 0;
+    width: 100%;
+    height: 50vh;
+    position: relative;
+}
+
+.ray-1,
+.ray-2,
+.ray-3,
+.ray-4 {
+    top: auto;
+    bottom: 0 !important;
+}
+
+@keyframes scale-down-masthead {
+  0% {
+    transform: scale(1);
+    width: 100%;
+  }
+  100% {
+    transform: scale(0.4);
+    width: 34rem;
+  }
+}
+.institute-masthead {
+    width: 100%;
+       animation-duration: 2s;
+    animation-name: scale-down-masthead;
+    animation-fill-mode: forwards;
+  animation-delay: 2s;
+  left: 2vw;
+}
+
+
+@keyframes move-masthead-up {
+  0% {
+    height: 50vh;
+  }
+  100% {
+    height: 10vh;
+  }
+}
+
+.animated-logo {
+  animation-duration: 2s;
+animation-name: move-masthead-up;
+animation-fill-mode: forwards;
+animation-delay: 2s;
+}
+
+@keyframes zoom-in-1 {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.institute-text__container {
+  opacity: 0;
+  transform: scale(0.8);
+
+  animation-duration: 2s;
+animation-name: zoom-in-1;
+animation-fill-mode: forwards;
+animation-delay: 2s;
+}
+
+.vassar-logotype {
+  color: $vassar-burgundy;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+.institute-masthead {
+  position: absolute;
+  transform-origin: left;
+}
+
+
+
+.card-img {
+  will-change: transform;
+}
+
+.top-links {
+  mix-blend-mode: multiply;
+  margin: 0 auto;
+
+   ul {
+     padding: 1rem;
+     text-align: center;
+  }
+  li {
+    opacity: 0;
+    list-style: none;
+    animation-duration: 2s;
+    animation-name: link-fade-in;
+    animation-fill-mode: forwards;
+    margin-bottom: 1.2rem !important;
+
+    @include break('medium') {
+      margin-bottom: 0.6rem !important;
+    }
+
+    @include bp-sequence();
+  }
+  a {
+    font-family: "futura-pt-condensed", sans-serif;
+    @include font-size(7rem);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.4s all ease;
+    line-height: 0.9;
+
+    @include break('medium') {
+      line-height: 1.2;
+    }
+
+    &:link, &:visited {
+      color: #3a4527;
+
+      span {
+        padding: 0 0.2em;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      color: #edb32e;
+    }
+  }
+}
+
+
+.top-links {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: calc(100% - 10rem);
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and ( min-height: 36rem ) {
+  .top-links {
+    display: flex;
+  }
+}
+
+.top-links li a {
+  background-color: transparent !important;
+  display: inline;
+}

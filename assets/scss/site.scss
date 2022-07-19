@@ -1,4 +1,28 @@
-@import "_styles.scss";
-@import "_intro-logo.scss";
+@import "_frameworks/_rfs";
+@import "_mixins";
+@import "_styles";
+@import "_intro-logo";
 @import "_row-full-width";
-@import "_fancy-links.scss";
+@import "_animated-lines";
+@import "_fancy-links";
+@import "_nav";
+@import "_type";
+@import "_row-napkins";
+@import "_inner-page-masthead";
+@import "_crossroads-animation";
+@import "_salt-line-animation";
+@import "_tile-collage";
+@import "_utility-overrides";
+@import "_vassar-masthead";
+@import "_fixed-content";
+@import "_section-title";
+@import "_row-center-content";
+@import "has-second-bg";
+@import "_page-cover-row";
+@import "_homepage";
+@import "_footer";
+@import "_vassar-template-overrides";
+
+footer.default.site-footer {
+    display: none;
+}

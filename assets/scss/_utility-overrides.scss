@@ -1,0 +1,21 @@
+.content-transition-speed-2s {
+  .content {
+    transition-duration: 2s;
+  }
+}
+
+
+.content-wide {
+  .content {
+    max-width: 74rem;
+  }
+}
+
+.content-padding-0 {
+  .content {
+    padding: 0 !important;
+  }
+}
+html:not(.is-ios) .fixed-bg {
+  background-attachment: fixed;
+}

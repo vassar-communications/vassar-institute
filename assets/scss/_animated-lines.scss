@@ -1,0 +1,53 @@
+.structure-line {
+  opacity: 0;
+}
+
+@include break('medium') {
+  .structure-line {
+    position: absolute;
+    transition: 1s all ease;
+    opacity: 1;
+  }
+  .structure-line-1 {
+      top: 8vh;
+      left: 4vw;
+      width: 0;
+      height: 2px;
+  }
+  .structure-line-2 {
+      bottom: 8vw;
+      left: 6vw;
+      width: 2vw;
+      height: 0;
+  }
+  .structure-line-3 {
+      width: 15em;
+      height: 0;
+      background: url(https://www.vassar.edu/sites/default/files/2021-10/mockup-graphics-_mUVHhvBYZ0-unsplash-copy.jpg);
+      background-size: cover;
+      bottom: 0;
+      right: 25%;
+      opacity: 0.4;
+  }
+  .structure-line-4 {
+      right: 7vw;
+      height: 0;
+      top: 13vh;
+      width: 0.3em;
+  }
+
+  .top-25pfrom-topOfWindow {
+    .structure-line-1 {
+      width: 50vw;
+    }
+    .structure-line-2 {
+      height: 40vh;
+    }
+    .structure-line-3 {
+      height: 16em;
+    }
+    .structure-line-4 {
+      height: 40vh;
+    }
+  }
+}

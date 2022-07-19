@@ -1,0 +1,21 @@
+.component.title-outside-content {
+  padding-top: 4rem;
+  min-height: 100vh;
+
+  .content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: none;
+    min-height: 100vh;
+  }
+
+  h2.main-content-display-title {
+    padding: 0;
+    position: static;
+    margin: 0;
+  }
+  .title-small-formal {
+    font-size: 3rem;
+  }
+}

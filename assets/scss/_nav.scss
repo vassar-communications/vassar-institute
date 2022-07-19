@@ -1,0 +1,210 @@
+.site-nav {
+    text-decoration: none !important;
+}
+.site-nav:after {
+    content: "\2630";
+    color: #fff;
+    color: #951829;
+    font-size: 1.8rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.4);
+    background: #fff;
+    width: 2.6rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    transition: 0.4s all ease;
+}
+
+
+.site-nav:hover:after {
+    background: #951829;
+    color: #fff;
+}
+
+.site-nav {
+    position: fixed;
+    right: 1.6rem;
+    width: 3rem;
+    height: 3rem;
+    top: 1rem;
+}
+.site-masthead a:hover,
+a.site-nav:hover {
+    background: transparent !important;
+}
+
+
+
+
+.open-nav {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 100;
+}
+.nav-links__container {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.94);
+  width: 100%;
+  height: 0;
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  transition: 1s all ease;
+  overflow: hidden;
+
+  @supports (backdrop-filter: blur()) {
+    background: rgba(255,255,255,0.8);
+  }
+
+  a {
+    font-family: "futura-pt-condensed", sans-serif;
+    @include font-size(8rem);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+a.site-masthead:not(.btn):hover,
+a.site-masthead:not(.btn):focus,
+.inner-page-masthead a:not(.btn):focus,
+.inner-page-masthead a:not(.btn):active {
+    background-color: transparent !important;
+}
+
+
+.main-nav {
+  padding: 0;
+  height: 0;
+}
+.close-nav {
+  position: absolute;
+  right: 1em;
+  top: 2em;
+}
+
+.nav-links {
+  width: 100%;
+
+  li {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: 1s all ease;
+    transition-delay: 0.4s;
+    list-style: none !important;
+    mix-blend-mode: multiply;
+
+    &:nth-child(1) {
+        transition-delay: 0.4s;
+    }
+    &:nth-child(2) {
+        transition-delay: 0.6s;
+    }
+    &:nth-child(3) {
+        transition-delay: 0.8s;
+    }
+
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+  }
+}
+
+
+.nav-open {
+  overflow: hidden;
+
+  .nav-links__container {
+    height: 100vh;
+
+    li {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+#site-menu:target {
+  height: 100vh;
+
+  li {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+//  I'm specifying the a tag here because if JS is off,
+//  the close button (and the nav-open button) are anchor links
+a.close-nav {
+    font-size: 1em;
+    color: transparent;
+    z-index: 1000;
+}
+
+.close-nav {
+  border: none;
+  color: transparent;
+  background: transparent;
+  height: 3rem;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 3rem;
+    border-top: 3px solid #f00;
+    height: 1px;
+    top: 1rem;
+    left: 0;
+    opacity: 0;
+    transition: 0.4s all ease;
+  }
+
+  &:hover {
+    &:before,
+    &:after {
+      border-width: 8px;
+    }
+  }
+}
+
+a.close-nav:not(.btn):hover {
+  color: transparent !important;
+  background: transparent !important;
+}
+
+#site-menu:target,
+.nav-open {
+  .close-nav {
+    &:before,
+    &:after {
+      opacity: 1;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+#show-the-nav:focus {
+  position: fixed;
+
+  span {
+    border: 2px solid #f00;
+  }
+}
+button#show-the-nav {
+    background: transparent;
+    border: none;
+}

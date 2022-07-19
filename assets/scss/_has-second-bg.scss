@@ -1,0 +1,18 @@
+.has-second-bg {
+  .content {
+    z-index: 10;
+  }
+  &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100%;
+      left: 0;
+      height: 100%;
+      background: var(--second-background);
+      background-size: contain;
+  }
+}
+.second-bg-fixed:before {
+  background-attachment: fixed;;
+}

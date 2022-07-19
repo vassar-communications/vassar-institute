@@ -1,0 +1,99 @@
+@keyframes fadein-backup {
+  from {
+    opacity: 0;
+          transform: translateX(0);
+  }
+  to {
+    opacity: 1;
+          transform: translateX(0);
+  }
+}
+
+body:not(.js) {
+  .cover-anim-salt-line {
+    .title-word {
+      opacity: 0;
+      animation-duration: 1s;
+      animation-delay: 1s;
+      animation-name: fadein-backup;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+.cover-anim-salt-line {
+  .content {
+    background: rgba(237, 179, 46, 0.66);
+  }
+  .world {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  &.vertical-unpack-animation {
+    .cover-title {
+      line-height: 0;
+      transition: 1s line-height ease;
+
+      & > span {
+          display: block;
+          text-align: center;
+      }
+    }
+  }
+
+  &.horiz-unpack-animation {
+    .cover-title {
+      .title-word {
+        display: inline-block;
+      }
+//      .js & {
+        .title-word {
+          transition: 1s all ease;
+        }
+        .title-word--the,
+        .title-word--line {
+          opacity: 0;
+        }
+        .title-word--the {
+          transform: translateX(1em);
+        }
+        .title-word--line {
+          transform: translateX(-1em);
+        }
+//      }
+    }
+
+    &.top-50pfrom-topOfWindow {
+      .js & {
+        .title-word--the,
+        .title-word--line {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .animated-middle-line {
+      border-top: 0.6em solid #fff;
+      width: 0;
+      position: fixed;
+      opacity: 1;
+    transition: 1s all ease;
+  }
+  &.vertical-unpack-animation.top-50pfrom-topOfWindow {
+//  body:not(.js) & {
+    .cover-title {
+      line-height: 1;
+    }
+  }
+  &.top-50pfrom-topOfWindow {
+//  body:not(.js) & {
+    .animated-middle-line {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+}

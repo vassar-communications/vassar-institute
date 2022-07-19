@@ -1,0 +1,65 @@
+.inner-page-masthead {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 6rem;
+    left: calc(50% - 3rem);
+    z-index: 1000;
+
+    .content {
+    	padding-top: 0 !important;
+    }
+}
+
+@keyframes inner-page-masthead-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.site-masthead {
+//  width: 6rem;
+  opacity: 0;
+  transform-origin: top center;
+
+  position: fixed;
+      top: 0;
+
+  animation-name: inner-page-masthead-appear;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+}
+
+.site-masthead {
+   transform-origin: top center;
+//    background: url(/sites/default/files/2021-10/VassarInstitute_SecondaryLogo_RGB-White.png);
+//    background-size: contain;
+//    background-repeat: no-repeat;
+    display: block;
+    width: 5em;
+    height: 4em;
+    background: transparent;
+    border: none;
+
+    &, polygon {
+      transition: 1s all ease;
+    }
+}
+
+.site-masthead:hover {
+  .cls-1 {
+    fill: #661c2d;
+  }
+  .cls-2 {
+    fill: #fff;
+  }
+//  filter: invert(100%);
+//  transform: scale(1.1);
+}
